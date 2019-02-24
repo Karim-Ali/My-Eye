@@ -1,9 +1,12 @@
 <?php
-
+session_start();
+$mail=$_SESSION["mail"];
+$token=$_SESSION["access_token"];
+$id=$_SESSION["id"];
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://www.googleapis.com/calendar/v3/calendars/kareem50329@gmail.com/events/jlr2f4mgkr7isigad8evdjap08",
+  CURLOPT_URL => "https://www.googleapis.com/calendar/v3/calendars/".$mail."/events/".$id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -12,7 +15,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "DELETE",
   CURLOPT_POSTFIELDS => "",
   CURLOPT_HTTPHEADER => array(
-    "Authorization: Bearer ya29.Glu5Bhx2eLTbO30C6SIjNZ7gLY22vlg6_htV38QTHS5OUPVXCYO9eaJW2Rq-AXh7YCWrlOwcQG6BZqsxcbtE43tCb3v7FnveoeOI_OXkJmXW4KaI8J5Ec_59OOSH",
+    "Authorization: Bearer ".$token,
     "Postman-Token: b3b24691-9427-4a5f-9896-4f87912e3992",
     "cache-control: no-cache"
   ),
@@ -27,5 +30,7 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   echo $response;
+  session_destroy();
+  header("location:index.php");
 }
 ?>
