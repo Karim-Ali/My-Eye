@@ -1,9 +1,12 @@
 <?php
-
+session_start();
+$mail=$_SESSION["mail"];
+$token=$_SESSION["access_token"];
+$city=$_POST["city"];
+$_SESSION["city"]=$city;
 $curl = curl_init();
-
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://www.googleapis.com/calendar/v3/calendars/kareem50329%40gmail.com/events/quickAdd?text=dkff&sendUpdates=none",
+  CURLOPT_URL => "https://www.googleapis.com/calendar/v3/calendars/".$mail."/events/quickAdd?text=Travelling%20to%20".$city."&sendUpdates=none",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -12,7 +15,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => "",
   CURLOPT_HTTPHEADER => array(
-    "Authorization: Bearer ya29.Glu5Bhx2eLTbO30C6SIjNZ7gLY22vlg6_htV38QTHS5OUPVXCYO9eaJW2Rq-AXh7YCWrlOwcQG6BZqsxcbtE43tCb3v7FnveoeOI_OXkJmXW4KaI8J5Ec_59OOSH",
+    "Authorization: Bearer ".$token,
     "Postman-Token: ee13e296-5769-4f9e-a5c8-d93d49b51ff3",
     "cache-control: no-cache"
   ),
@@ -27,5 +30,8 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   echo $response;
+  $json = json_decode($response, true);
+  $_SESSION["id"]=$json['id'];;
+  header("location:index2.php");
 }
 ?>
