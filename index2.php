@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php 
-//session_start();
-//$city = $_SESSION["city"]; ?>
+session_start();
+$city = $_SESSION["city"]; ?>
 <html>
 <head>
 <title>Travelling Date</title>
@@ -13,18 +13,29 @@
 <link rel="stylesheet" href="css/all.css">
 </head>
 <body>
-    <form method="post" action="deleteEvent.php">
+    <form method="post" action="deleteEvent.php" onclick="callAPI(getElementById('c'))">
         <ul>
-            <li><input type="text" name="city" placeholder="<?php echo $city;?>" readonly></li>
+            <li><input id="c" type="text" name="city" value="egypt" placeholder="<?php echo $city;?>"readonly></li>
             <li><a class="a" href = "#">Add</a></li>
             <li><input class="a" type="submit" value="Delete"></li>
         </ul>
-    </form>
-    <div class="w3-content">
-    <h6 class="w3-center w3-jumbo" >Countries</h6>
+    </form >
+    <div class="dev">
+        <div><img class="w3-quarter w3-image" id="sora1" src="" ><br></div>
+        <div><img class="w3-quarter w3-image" id="sora2" src="" ><br></div>
+        <div><img class="w3-quarter w3-image" id="sora3" src="" ><br></div>
+        <div><img class="w3-quarter w3-image" id="sora4" src="" ><br></div>
+        <div><img class="w3-quarter w3-image" id="sora5" src="" ><br></div>
+    </div>
+    <div class="dev2">
+        <p class = "mar" id = "name">Country's name :</p>
+        <p class = "mar" id = "capital">Country's capital : </p>
+        <p class = "mar" id = "language">Country's language : </p>
     </div>
 </body>
+    <script src="towAPIs.js"></script>
 <style>
+    
     body{
         margin: 0;
         padding: 0;
@@ -107,6 +118,32 @@
     input:hover{
         background: white;
         opacity: 1;
+    }
+    img{ 
+        height: 10%;
+    }
+    .dev{
+        position:absolute;
+        bottom: 50px;
+        left: 80px;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .dev2{
+        position:absolute;
+        bottom: 0px;
+        left: 80px;
+        margin: 0;
+        padding: 5px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .mar{
+        margin: 0 100px;
     }
 </style>
 </html>
